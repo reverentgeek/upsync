@@ -1,6 +1,6 @@
 ## UpSync: Callback -> Async/Await
 
-![UpSync](./upsync.png)
+![UpSync](https://raw.githubusercontent.com/reverentgeek/upsync/master/upsync.png)
 
 > Note: This module is intended to be used with Node.js 7+ or other JavaScript engines/transpilers that have support for ES2017 async/await.
 
