@@ -1,4 +1,4 @@
-const asyncify = require( "../index" );
+const upsync = require( "../index" );
 
 const goodCallback = ( p1, cb ) => {
 	cb( null, `${ p1 }-asyncified` );
@@ -8,9 +8,9 @@ const badCallback = ( p1, cb ) => {
 	cb( new Error( "it blowed up" ) );
 };
 
-describe( "asyncify tests", () => {
+describe( "upsync tests", () => {
 	it( "should return an AsyncFunction", () => {
-		const f = asyncify( goodCallback );
+		const f = upsync( goodCallback );
 		f.should.be.an( "AsyncFunction" );
 		return f( "yes" ).then( res => {
 			res.should.equal( "yes-asyncified" );
@@ -18,24 +18,24 @@ describe( "asyncify tests", () => {
 	} );
 
 	it( "should act as a promise", () => {
-		const f = asyncify( goodCallback );
+		const f = upsync( goodCallback );
 		return f( "yes" ).then( res => {
 			res.should.equal( "yes-asyncified" );
 		} );
 	} );
 
-	it( "should return function with asyncified name", () => {
-		const f = asyncify( goodCallback );
+	it( "should return function with upsyncified name", () => {
+		const f = upsync( goodCallback );
 		f.name.should.equal( "asyncGoodCallback" );
 	} );
 
 	it( "should return anonymous function with asyncAnonymous name", () => {
-		const f = asyncify( ( cb ) => cb( null, "hey" ) );
+		const f = upsync( ( cb ) => cb( null, "hey" ) );
 		f.name.should.equal( "asyncAnonymous" );
 	} );
 
 	it( "should reject with an error", () => {
-		const f = asyncify( badCallback );
+		const f = upsync( badCallback );
 		return f( "yes" )
 			.then( res => {
 				res = "what?!";
@@ -49,7 +49,7 @@ describe( "asyncify tests", () => {
 		let err = null;
 		let res = null;
 
-		const f = asyncify( badCallback );
+		const f = upsync( badCallback );
 
 		const tryF = async () => {
 			try {
@@ -70,7 +70,7 @@ describe( "asyncify tests", () => {
 		const asyncf = async () => {
 			return "async!";
 		};
-		const f = asyncify( asyncf );
+		const f = upsync( asyncf );
 
 		f.should.be.an( "AsyncFunction" );
 		f.name.should.equal( "asyncf" );
@@ -80,7 +80,7 @@ describe( "asyncify tests", () => {
 		const callBackNoArgs = cb => {
 			cb( null, "here's yer callback" );
 		};
-		const f = asyncify( callBackNoArgs );
+		const f = upsync( callBackNoArgs );
 		return f().then( res => {
 			res.should.equal( "here's yer callback" );
 		} );
@@ -90,7 +90,7 @@ describe( "asyncify tests", () => {
 		const callBackF = ( obj, cb ) => {
 			cb( null, `your ${ obj.title }` );
 		};
-		const f = asyncify( callBackF );
+		const f = upsync( callBackF );
 		return f( { title: "beardiness" } ).then( res => {
 			res.should.equal( "your beardiness" );
 		} );
@@ -100,7 +100,7 @@ describe( "asyncify tests", () => {
 		const callBackF = ( arr, cb ) => {
 			cb( null, `hello ${ arr[ 1 ] }` );
 		};
-		const f = asyncify( callBackF );
+		const f = upsync( callBackF );
 		return f( [ "john", "david", "smith" ] ).then( res => {
 			res.should.equal( "hello david" );
 		} );
@@ -110,7 +110,7 @@ describe( "asyncify tests", () => {
 		const callBackF = ( x, y, z, cb ) => {
 			cb( null, x + y + z );
 		};
-		const f = asyncify( callBackF );
+		const f = upsync( callBackF );
 		return f( "a", "b", "c" ).then( res => {
 			res.should.equal( "abc" );
 		} );
@@ -120,7 +120,7 @@ describe( "asyncify tests", () => {
 		const callBackF = ( { x, y, z }, cb ) => {
 			cb( null, x + y + z );
 		};
-		const f = asyncify( callBackF );
+		const f = upsync( callBackF );
 		return f( { x: "a", y: "b", z: "c" } ).then( res => {
 			res.should.equal( "abc" );
 		} );
@@ -130,7 +130,7 @@ describe( "asyncify tests", () => {
 		const callBackF = ( { x, y, z }, cb ) => {
 			cb( null, x, y, z );
 		};
-		const f = asyncify( callBackF );
+		const f = upsync( callBackF );
 		return f( { x: "a", y: "b", z: "c" } ).then( res => {
 			res.should.deep.equal( [ "a", "b", "c" ] );
 		} );

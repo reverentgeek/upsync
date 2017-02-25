@@ -17,7 +17,7 @@ module.exports = callBackStyleFunction => {
 		return callBackStyleFunction;
 	}
 
-	if ( typeof callBackStyleFunction !== "function" ) { // eslint-disable-line valid-typeof
+	if ( typeof callBackStyleFunction !== "function" ) {
 		throw new Error( "Must be a callback-style function" );
 	}
 
