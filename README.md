@@ -1,13 +1,13 @@
-## Callback -> Async/Await
+## UpSync: Callback -> Async/Await
 
-This project is more about my personal learning of Node.js support for JavaScript ES2017 async/await.
+This project is more my personal tool for learning Node.js support for JavaScript ES2017 async/await.
 
 I thought it would be a fun exercise to write my own utility that takes a traditional callback-style function, and returns it wrapped in an async function. This is similar to some of the callback-to-promise utilities that are in various libraries.
 
 ### Basic usage:
 
 ```javascript
-const asyncify = require( "cb-to-await" );
+const upsync = require( "upsync" );
 
 // The old, callback way of doing things
 function oldSchool( firstname, lastname, callback ) {
@@ -15,8 +15,8 @@ function oldSchool( firstname, lastname, callback ) {
 	callback( null, msg );
 }
 
-// Asyncify that sucker
-const asyncSchool = asyncify( oldSchool );
+// upsync that sucker
+const asyncSchool = upsync( oldSchool );
 
 // Let's use it
 async function runThisThang() {
@@ -30,7 +30,7 @@ runThisThang();
 ### Same deal, but with fat arrows:
 
 ```javascript
-const asyncify = require( "cb-to-await" );
+const upsync = require( "upsync" );
 
 // The old, callback way of doing things
 const oldSchool = ( firstname, lastname, callback ) => {
@@ -38,8 +38,8 @@ const oldSchool = ( firstname, lastname, callback ) => {
 	callback( null, msg );
 };
 
-// Asyncify that sucker
-const asyncSchool = asyncify( oldSchool );
+// upsync that sucker
+const asyncSchool = upsync( oldSchool );
 
 // Let's use it
 const runThisThang = async () => {
