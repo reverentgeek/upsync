@@ -1,0 +1,23 @@
+{
+  "name": "cb-to-await",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --fix ./",
+    "pretest": "npm run lint",
+    "test": "NODE_ENV=test mocha -r ./specs/helpers -R spec 'specs/**/*.spec.js'",
+    "prepublish": "npm run test"
+  },
+  "author": "David Neal <david@reverentgeek.com> (http://reverentgeek.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "*",
+    "eslint": "*",
+    "eslint-config-leankit": "*",
+    "mocha": "*"
+  },
+  "engines" : {
+    "node" : ">=7.0"
+  }
+}
